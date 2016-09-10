@@ -3,7 +3,14 @@
 # numbers, inclusive.
 
 def sum_of_range(array)
-
+  array = array.sort
+  last_num = array.last
+  sum = 0
+  last_num.times do 
+    sum = sum + last_num
+    last_num -= 1
+  end
+  result = sum
 end
 
 # Driver code - don't touch anything below this line.
