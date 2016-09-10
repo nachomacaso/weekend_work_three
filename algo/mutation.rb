@@ -3,7 +3,13 @@
 # the first string, and false otherwise.
 
 def mutation?(base_word, mutation)
-
+  base_array = base_word.each_char.to_a.sort
+  mutation_array = mutation.each_char.to_a.sort
+  if mutation_array.sort == base_array & mutation_array
+    result = true
+  else
+    result = false
+  end 
 end
 
 # Driver code - don't touch anything below this line.
