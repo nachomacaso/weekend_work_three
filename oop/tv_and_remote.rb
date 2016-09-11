@@ -15,33 +15,42 @@ class Tv
   attr_accessor :power, :volume, :channel
 
   def initialize(controls_hash)
-    @power = controls_hash(:power)
-    @volume = controls_hash(:volume)
-    @channel = controls_hash(:channel)
+    @power = controls_hash[:power]
+    @volume = controls_hash[:volume]
+    @channel = controls_hash[:channel]
   end
 end
 
 class Remote < Tv
   attr_accessor :tv
 
-  def initialize(tv_brand)
-    @tv = tv_brand(:tv)
+  def initialize(controls_hash)
+    super(controls_hash)
+    @tv = controls_hash[:tv]
   end
 
   def toggle_power
-    @power = true
+    if @tv == "sony"
+      @power = true
+    end
   end
 
   def increment_volume
-    @volume += 1
+    if @tv == "sony"
+      @volume += 1
+    end
   end
 
   def decrement_volume
-    @volume -= 1
+    if @tv == "sony"
+      @volume -= 1
+    end
   end
 
   def set_channel(new_channel)
-    @channel = new_channel
+    if @tv == "sony"
+      @channel = new_channel
+    end
   end
 end
 
@@ -50,8 +59,7 @@ end
 puts "TESTING tv_and_remote"
 puts
 
-sony_tv = Tv.new(power: false, volume: 0, channel: 1)
-sony_remote = Remote.new(tv: "sony")
+sony_tv = Remote.new(power: false, volume: 5, channel: 1, tv: "sony")
 
 sony_tv.toggle_power
 
@@ -72,7 +80,7 @@ puts "TV volume?"
 puts sony_tv.volume
 puts
 
-if sony_tv.volume == 1
+if sony_tv.volume == 6
   puts "PASS!"
 else
   puts "F"
@@ -85,7 +93,7 @@ puts "TV volume?"
 puts sony_tv.volume
 puts
 
-if sony_tv.volume.zero?
+if sony_tv.volume == 5
   puts "PASS!"
 else
   puts "F"
